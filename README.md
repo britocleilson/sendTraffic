@@ -28,9 +28,19 @@ locust -f locust/locustfile.py --host=<URL_DA_APLICACAO>
 kubectl apply -f locust/locust-master-deployment.yaml
 kubectl apply -f locust/locust-worker-deployment.yaml
 
-### K6
+
+```
+## K6
 # Teste local
 k6 run --vus 100 --duration 300s k6/script.js
+
+# Jmeter
+# Executar plano de teste
+jmeter -n -t jmeter/test_plan.jmx -l results.jtl
+
+# Gerar relatório HTML
+jmeter -g results.jtl -o dashboard/
+
 
 # Execução no cluster (via Job do Kubernetes)
 kubectl apply -f k6/k8s-deployment.yaml
