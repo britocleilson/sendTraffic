@@ -30,20 +30,26 @@ kubectl apply -f locust/locust-worker-deployment.yaml
 
 
 ```
-## K6
-# Teste local
+# K6
+## Teste local
 k6 run --vus 100 --duration 300s k6/script.js
 
 # Jmeter
-# Executar plano de teste
+## Executar plano de teste
 jmeter -n -t jmeter/test_plan.jmx -l results.jtl
 
-# Gerar relatório HTML
+## Gerar relatório HTML
 jmeter -g results.jtl -o dashboard/
-
 
 # Execução no cluster (via Job do Kubernetes)
 kubectl apply -f k6/k8s-deployment.yaml
+
+# Artillary
+## Teste rápido
+artillery run --environment production artillery/load-test.yaml
+
+## Execução contínua
+artillery run-artillery/load-test.yaml --count 10 -n 500
 
 
 
